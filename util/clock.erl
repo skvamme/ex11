@@ -12,8 +12,8 @@
 start() -> spawn(?MODULE,init,[]).
 
 init() ->
-    {ok, Display} = ex11_lib:xStart("3.1"),
-    xSetScreenSaver(Display,0),
+    {ok, Display} = ex11_lib:xStart(":1.0"),
+    xSetScreenSaver(Display,1),
     Win = xCreateSimpleWindow(Display,0,0,?WT,?HT,?XC_arrow,xColor(Display,?black)),
     xDo(Display, eMapWindow(Win)),
     xFlush(Display),

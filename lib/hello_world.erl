@@ -27,7 +27,7 @@ start() ->
     spawn_link(fun() -> init() end).
 
 init() ->
-    {ok, Pid} = xStart("3.2"),
+    {ok, Pid} = ex11_lib:xStart(":1.0"),
     Win  = xCreateSimpleWindow(Pid, 10, 10, 300, 100, ?XC_arrow, 
 			       xColor(Pid, ?wheat2)),
     Font = xEnsureFont(Pid, "9x15"),  
@@ -52,16 +52,3 @@ loop(Pid, Win, Cmd) ->
 	    io:format("Here:~p~n",[Any]),
 	    loop(Pid, Win, Cmd)
     end.
-
-
-
-   
-
-
-
-
-
-
-
-
-

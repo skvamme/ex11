@@ -10,7 +10,7 @@ start() -> spawn(?MODULE,init,[]).
 
 init() ->
 	Pid = self(),
-	{ok, Display} = ex11_lib:xStart("3.1"),
+	{ok, Display} = ex11_lib:xStart(":1.0"),
     xSetScreenSaver(Display,0),
 	Win = xCreateSimpleWindow(Display,0,0,?WT,?HT,?XC_arrow,xColor(Display,?black)),
 	xDo(Display, eMapWindow(Win)),
@@ -36,18 +36,3 @@ loop(Pid,Port,Display,Win,Ready,Graph,Num) ->
 		Any -> io:format("~p got unknown msg: ~p~n",[?MODULE, Any]),
 			?MODULE:loop(Pid,Port,Display,Win,Ready,Graph,Num)
 	end.
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
