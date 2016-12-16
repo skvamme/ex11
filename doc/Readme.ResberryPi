@@ -1,0 +1,77 @@
+This ex11 will be tailored to fit Raspbian on Raspberry Pi, however most linux distributions will do if you only replace the apt-get command with the corresponding one for your distribution. Read more about Erlang on Raspberry Pi at my elinux page http://elinux.org/Erlang
+
+Sometimes, when you don't need a full fledged window manager but just want to display a sensor value or a couple of push buttons and a slider on a 5" screen, then try this all erlang graphics X11 library for your raspberry pi erlang project. You get soft realtime animations. Concurrency between 2 or more widgets on screen. Hot code loading, you can update the GUI from your PC while your embedded raspi system is running. Custom widgets, show what you can draw. Lots of free DXF and Google Sketchup graphics and symbol libraries on the internet to download and convert from DXF to ex11 with the included dxf2erl utility.
+
+To help create new widgets there is a small program in util to convert DXF-files to erlang ex11 drawing primitives. Download or draw your own graphics in a CAD system and save as DXF. Convert the DXF file with dxf2erl:start("filename.dxf"). from the erlang console. There is a sample DXF file in util as well as a demo widget made up from the clock.dxf file. You can even load the clock.dxf file into a CAD system and change, scale and rotate the graphics and save it into a new DXF file.
+
+1. Mirror your drawing in the CAD-app down over the X-axis (Y=0)
+2. Move the drawing up to it's previous position (up above the X-axis)
+3. Save as DXF
+4. Undo Move and Miror
+
+
+The DXF file can be created in QCAD (free) http://www.ribbonsoft.com/en/ , AUTOCAD, Google Sketchup Pro and other CAD systems. Entities with higher thickness will be drawn last. Closed polylines will be filled areas in ex11.
+
+
+Install with a fresh Raspbian (even Light will do but remember to run raspi-config to expand your file system to fill your memory card). If you already have xserver and erlang installed, skip those steps:
+# Erlang
+sudo apt-get update
+sudo apt-get install wget
+sudo apt-get install libssl-dev
+sudo apt-get install ncurses-dev
+wget http://www.erlang.org/download/otp_src_18.2.1.tar.gz
+tar -xzvf otp_src_18.2.1.tar.gz
+cd otp_src_18.2.1/
+./configure
+make
+sudo make install
+cd ..
+sudo rm -R otp_src_18.2.1/
+
+# xserver
+sudo apt-get install xserver-xorg
+
+
+# ex11
+sudo apt-get install git
+git clone https://github.com/skvamme/ex11.git
+sudo apt-get install libjpeg8-dev
+xauth
+add :0 . ab12cd34ef56fe78dc90ba1a2b3c4d5e6f
+#(If there is any chance your system could be hacked, replace at least one of the random characters above)
+exit
+#Add the folling two lines to ~/.profile
+export DISPLAY="localhost:0.0"
+export XAUTHORITY="/home/pi/.Xauthority"
+
+cd ex11
+make
+
+# start Xorg
+sudo Xorg -s 0 dpms &
+(Press enter and you will get the command prompt back. Xorg can be automatically started at boot, Google it up)
+
+
+Compile util with:
+cd util
+erlc -I ../lib *.erl
+
+Start util with:
+erl -noshell -pa '../lib' -s clock init
+
+
+Compile widgets with:
+cd widgets
+erlc -I ../lib *.erl
+
+Start widgets with:
+sudo erl -pa '../lib'
+
+In erlang console, type:
+main:start().
+
+
+Remember you have to have your Xserver running. On Raspberry Pi it's automatically started, or on Raspbian Lite it's sudo Xorg -s 0 dpms & and if you are on a Mac you can use XQuartz (free). Install it and change in Preferences - Security - Allow connections from network clients.
+
+
+

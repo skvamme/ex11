@@ -1,0 +1,23 @@
+## Slackware
+
+All you need in slackware is install Erlang/OTP from slackbuild or download source code from http://erlang.org and compile yourself.
+
+Note!
+You need Erlang/OTP version above 19.0, or you should install unixdom_drv (or something other package) make erlang can connect unix domain socket.
+
+
+# Running under window manager
+
+Xephyr and Xnest are helpful tool for develop x program when x server already running.
+Run Xephyr or Xnest with "Xephyr -ac :1 -auth ~/.Xauthority &" will open a window in current window manager, but user can run other window manager in this window.
+You must add xauth before Xephyr running, or can't connect to this xserver.
+Running "xauth add ${HOST}:1 . $(xxd -l 16 -p /dev/urandom)" for auto add auth for our develop environment.
+Now, we can develop x client program for test.
+
+
+# How to
+
+Just see util/clock.erl. Pass your x screen number to xStart.
+
+Note!
+First parameter for origin ex11_lib:xStart/1 is version number.
