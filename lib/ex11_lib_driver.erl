@@ -27,7 +27,7 @@
 %%                                 Pid = is the Pid of the driver process
 %%    {error, Why} otherwise
 
--export([start/0, send_cmd/2, new_id/1, get_display/2]).
+-export([start/1, send_cmd/2, new_id/1, get_display/2]).
 
 
 -import(ex11_lib, [pError/1, pEvent/1]).
@@ -48,31 +48,32 @@ rpc(Pid, Q) ->
 	    Reply
     end.
 
-start() ->
-    process_flag(trap_exit,true),
-    S = self(),
-    Pid = spawn_link(fun() -> init(S) end),
-    %% io:format("ex11_lib_driver start/1 Pid=~p~n",[Pid]),
-    receive 
-	{Pid,Ack} -> Ack 
-    end.
+start(Display) ->
+  process_flag(trap_exit,true),
+  S = self(),
+  Pid = spawn_link(fun() -> init(S, Display) end),
+  %% io:format("ex11_lib_driver start/1 Pid=~p~n",[Pid]),
+  receive 
+    {Pid,Ack} -> Ack 
+  end.
 
 return(Pid, Val) ->
     Pid ! {self(), Val}.
 
-init(From) ->
-    case ex11_lib_connect:start() of
-	{ok, {Display, Screen, Fd}} ->
-	    %% io:format("Display=~p~n",[Display]),
-	    %% ?PRINT_DISPLAY(Display),
-	    %% Max command length 
-	    Max = Display#display.max_request_size,
-	    %% io:format("Max RequestSize=~p~n",[Max]),
-	    return(From, {ok, {self(), Display, Screen}}),
-	    driver_loop(From, Fd, Max);
-	Error -> 
-	    return(From, {error, connect})
-    end.
+init(From, Target) ->
+  io:format("init driver Display=~p~n",[Target]),
+  case ex11_lib_connect:start(Target) of
+    {ok, {Display, Screen, Fd}} ->
+      %% io:format("Display=~p~n",[Display]),
+      %% ?PRINT_DISPLAY(Display),
+      %% Max command length 
+      Max = Display#display.max_request_size,
+      %% io:format("Max RequestSize=~p~n",[Max]),
+      return(From, {ok, {self(), Display, Screen}}),
+      driver_loop(From, Fd, Max);
+    Error -> 
+      return(From, {error, connect})
+  end.
 
 driver_loop(Client, Fd, Max) ->
     loop(Client, Fd, <<>>, Max, [], 0).

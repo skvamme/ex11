@@ -100,16 +100,16 @@ read() ->
     read(F).
 
 read(Fname) ->
-    case file:read_file(Fname) of
-	{ok,Bin} ->
-	    List = binary_to_list(Bin),
-	    case catch parse_xauth(List) of
-		{'EXIT',Reason} -> {error,Reason};
-		Else            -> {ok,Else}
-	    end;
-	Error ->
-	    Error
-    end.
+  case file:read_file(Fname) of
+    {ok,Bin} ->
+      List = binary_to_list(Bin),
+      case catch parse_xauth(List) of
+        {'EXIT',Reason} -> {error,Reason};
+        Else            -> {ok,Else}
+      end;
+    Error ->
+      Error
+  end.
 
 %% ---------------------------------------------
 %% Print xauth records.

@@ -12,7 +12,7 @@
 %%    {ok, Pid, Screen}    if the connection works
 %%    {error, Why} otherwise
 
--export([start/0]).
+-export([start/1]).
 
 -import(lists, [foldl/3, foreach/2, last/1, member/2]).
 
@@ -24,55 +24,55 @@
 %% Note most of the RPC routines to this module are defined in
 %% ex11_lib.erl
 
-start() ->
-    S = self(),
-    Pid = spawn_link(fun() -> init(S) end),
-    %% io:format("ex11_lib_connect start/1 Pid=~p~n",[Pid]),
-    receive 
-	{Pid, Ack} ->
-	    Ack
-    end.
+start(Display) ->
+  S = self(),
+  Pid = spawn_link(fun() -> init(S, Display) end),
+  %% io:format("ex11_lib_connect start/1 Pid=~p~n",[Pid]),
+  receive 
+    {Pid, Ack} ->
+      Ack
+  end.
 
-init(From) ->
-    process_flag(trap_exit, true),
-    case ex11_lib_driver:start() of
-	{ok, {Driver, Display, Screen}} ->
-	    %% Screen is the screen we were started with
-	    %% ie the screen in the DISPLAY variable
-	    %% This may or may not be the screen that we want to use
-	    %% io:format("Display=~p~n",[Display]),
-	    %% ?PRINT_DISPLAY(Display),
-	    %% The next line is horribly wrong
-	    %% there is not one color fun
-	    %% but a large number (one for each visual in each screen)
-	    ColorFun = ex11_lib_utils:mk_colorfun(Display, Screen),
-	    DefaultScreen =  Display#display.default_screen,
-	    DefaultDepth = ?ROOT_DEPTH(Display, DefaultScreen),
-	    DefaultWin = ?ROOT_ID(Display, DefaultScreen),
-	    %% io:format("ex11_lib_control: Screen=~p~n",[Screen]),
-	    %% io:format("ex11_lib_control: default Screen=~p~n",
-	    %% [DefaultScreen]),
-	    DictVals =
-		[{color, ColorFun},
-		 {defaultScreen, DefaultScreen},
-		 {defaultWindow, DefaultWin},
-		 {defaultDepth, DefaultDepth},
-		 {{depth, DefaultWin}, DefaultDepth},
-		 {resource_id, Display#display.resource_id},
-		 {resource_shift, Display#display.resource_shift},
-		 {resource_mask, Display#display.resource_mask},
-		 {resource_base, Display#display.resource_base}
-		],
-	    Db0 = dict:from_list(DictVals),
-	    reply(From, {ok, self(), Screen}),
-	    %% io:format("ex11_lib_control DISPLAY==~p~n",[self()]),
-	    %% io:format("ex11_lib_control ie DRIVER=~p~n",[Driver]),
-	    %% io:format("Starting a keyboard driver~n"),
-	    ex11_lib_keyboard_driver:ensure_started(self()),
-	    loop(From, Driver, 1, Display, Db0, []);
-	Error ->
-	    reply(From, Error)
-    end.
+init(From, Target) ->
+  process_flag(trap_exit, true),
+  case ex11_lib_driver:start(Target) of
+    {ok, {Driver, Display, Screen}} ->
+      %% Screen is the screen we were started with
+      %% ie the screen in the DISPLAY variable
+      %% This may or may not be the screen that we want to use
+      %% io:format("Display=~p~n",[Display]),
+      %% ?PRINT_DISPLAY(Display),
+      %% The next line is horribly wrong
+      %% there is not one color fun
+      %% but a large number (one for each visual in each screen)
+      ColorFun = ex11_lib_utils:mk_colorfun(Display, Screen),
+      DefaultScreen =  Display#display.default_screen,
+      DefaultDepth = ?ROOT_DEPTH(Display, DefaultScreen),
+      DefaultWin = ?ROOT_ID(Display, DefaultScreen),
+      %% io:format("ex11_lib_control: Screen=~p~n",[Screen]),
+      %% io:format("ex11_lib_control: default Screen=~p~n",
+      %% [DefaultScreen]),
+      DictVals =
+      [{color, ColorFun},
+       {defaultScreen, DefaultScreen},
+       {defaultWindow, DefaultWin},
+       {defaultDepth, DefaultDepth},
+       {{depth, DefaultWin}, DefaultDepth},
+       {resource_id, Display#display.resource_id},
+       {resource_shift, Display#display.resource_shift},
+       {resource_mask, Display#display.resource_mask},
+       {resource_base, Display#display.resource_base}
+      ],
+      Db0 = dict:from_list(DictVals),
+      reply(From, {ok, self(), Screen}),
+      %% io:format("ex11_lib_control DISPLAY==~p~n",[self()]),
+      %% io:format("ex11_lib_control ie DRIVER=~p~n",[Driver]),
+      %% io:format("Starting a keyboard driver~n"),
+      ex11_lib_keyboard_driver:ensure_started(self()),
+      loop(From, Driver, 1, Display, Db0, []);
+    Error ->
+      reply(From, Error)
+  end.
 
 
 reply(Pid, X) -> Pid ! {self(), X}.
