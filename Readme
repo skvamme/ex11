@@ -1,13 +1,9 @@
-## ex11 - A x11 programming lib for erlang without xlib or xcb.
+To help create new widgets there is a small program in util to convert DXF-files to erlang ex11 drawing primitives. Download or draw your own graphics in a CAD system and save as DXF. Convert the DXF file with dxf2erl:start("filename.dxf"). from the erlang console. There is a sample DXF file in util as well as a demo widget made up from the clock.dxf file. You can even load the clock.dxf file into a CAD system and change, scale and rotate the graphics and save it into a new DXF file.
 
-X11 is GUI protocol for unix or unix-like machine. xlib and xcb are library for communicate to Xserver. Nowaday we use GTK/QT or something other lib make our beautiful and helpful GUI program. However, those lib based on xlib or xcb. When we develop a x program with erlang if no one porting your lovely GUI library, you should do this yourself. Porting is a big problem.
+1. Mirror your drawing in the CAD-app down over the X-axis (Y=0)
+2. Move the drawing up to it's previous position (up above the X-axis)
+3. Save as DXF
+4. Undo Move and Miror
 
-Joe Armstrong and his friend develop ex11 make GUI programming easy in erlang. Easy that's most important in ex11. You can see http://www.erlang.se/workshop/2004/ex11.pdf for intro.
 
-
-# Note!
-
-You don't need other lib with ex11 if you use Erlang/OTP above 19.0. If your version smaller than 19.0, please install addition lib make erlang can use unix domain socket or run x server in normal socket. See doc for more infomation.
-
-Read doc/Readme.Slackware for slackware user.
-Read doc/Readme.ResberryPi for debian/ubuntu/ResberryPi user.
+The DXF file can be created in QCAD (free) http://www.ribbonsoft.com/en/ , AUTOCAD, Google Sketchup Pro and other CAD systems. Entities with higher thickness will be drawn last. Closed polylines will be filled areas in ex11.
