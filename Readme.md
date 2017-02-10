@@ -15,4 +15,5 @@ Mac OSX
 Raspbian on Raspberry Pi
 
 <h1>Custom widgets</h1>
+Draw custom [widgets](doc/dxf2erl.md)
 
