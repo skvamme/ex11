@@ -2,7 +2,7 @@
 
 Install with a fresh Raspbian (even Light will do but remember to run raspi-config to expand your file system to fill your memory card).
 
-# Erlang
+## Erlang
 ```bash
 sudo apt-get update
 sudo apt-get install wget
@@ -17,12 +17,12 @@ sudo make install
 cd ..
 rm otp_src_19.2.tar.gz
 ```
-# xserver (only on Raspbian Light)
+## xserver (only on Raspbian Light)
 ```bash
 sudo apt-get install xserver-xorg
 ```
 
-# ex11
+## ex11
 ```bash
 sudo apt-get install git
 git clone https://github.com/skvamme/ex11.git
@@ -38,33 +38,33 @@ export XAUTHORITY="/home/pi/.Xauthority"
 cd ex11
 make
 ```
-# start Xorg (only on Raspbian Light)
+## start Xorg (only on Raspbian Light)
 ```bash
 sudo Xorg -s 0 dpms &
 ```
 (Press enter and you will get the command prompt back. Xorg can be automatically started at boot, Google it up)
 
 
-Compile util with:
+## Compile util with:
 ```bash
 cd util
 erlc -I ../lib *.erl
 ```
-Start util with:
+## Start util with:
 ```bash
 erl -noshell -pa '../lib' -s clock init
 ```
 
-Compile widgets with:
+## Compile widgets with:
 ```bash
 cd widgets
 erlc -I ../lib *.erl
 ```
-Start widgets with:
+## Start widgets with:
 ```bash
 sudo erl -pa '../lib'
 ```
-In erlang console, type:
+## In erlang console, type:
 ```erlang
 main:start().
 ```

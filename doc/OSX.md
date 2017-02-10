@@ -4,6 +4,11 @@ Download XQuartz.app (free from app store). Install it and change in Preferences
 
 Start XQuartz
 
+Compile ex11
+```bash
+cd ex11
+make
+```
 Compile util with:
 ```bash
 cd util
