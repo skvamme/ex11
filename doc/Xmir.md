@@ -25,8 +25,39 @@ Xmir :0 --desktop_file_hint=/usr/share/applications/unity8.desktop &
 cd myRoot
 sudo chroot .
 cd
+```
+
+Compile ex11
+```bash
 cd ex11
 make
+```
+
+## Compile util with:
+```bash
 cd util
+erlc -I ../lib *.erl
+```
+
+## Start util with:
+```bash
 erl -noshell -pa '../lib' -s clock init
 ```
+
+## Compile widgets with:
+```bash
+cd widgets
+erlc -I ../lib *.erl
+```
+
+## Start widgets with:
+```bash
+sudo erl -pa '../lib'
+```
+
+## In erlang console, type:
+```erlang
+main:start().
+```
+
+
