@@ -26,36 +26,56 @@ cd myRoot
 sudo chroot .
 cd
 ```
-
-Compile ex11
+### Install Erlang
 ```bash
+sudo apt-get update
+sudo apt-get install wget
+sudo apt-get install libssl-dev
+sudo apt-get install ncurses-dev
+wget http://www.erlang.org/download/otp_src_19.2.tar.gz
+tar -xzvf otp_src_19.2.tar.gz
+cd otp_src_19.2/
+./configure
+make
+sudo make install
+cd ..
+rm otp_src_19.2.tar.gz
+```
+### Install ex11
+```bash
+sudo apt-get install git
+git clone https://github.com/skvamme/ex11.git
+sudo apt-get install libjpeg8-dev
+xauth
+add :0 . ab12cd34ef56fe78dc90ba1a2b3c4d5e6f
+#(If there is any chance your system could be hacked, replace at least one of the random characters above)
+exit
 cd ex11
 make
 ```
-
-## Compile util with:
+### Compile util with:
 ```bash
 cd util
 erlc -I ../lib *.erl
 ```
 
-## Start util with:
+### Start util with:
 ```bash
 erl -noshell -pa '../lib' -s clock init
 ```
 
-## Compile widgets with:
+### Compile widgets with:
 ```bash
 cd widgets
 erlc -I ../lib *.erl
 ```
 
-## Start widgets with:
+### Start widgets with:
 ```bash
 sudo erl -pa '../lib'
 ```
 
-## In erlang console, type:
+### In erlang console, type:
 ```erlang
 main:start().
 ```
