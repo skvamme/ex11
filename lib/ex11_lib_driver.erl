@@ -103,7 +103,7 @@ loop(Client, Fd, Bin, Max, OB, LO) ->
 	{'EXIT', _, die} ->
 	    gen_tcp:close(Fd),
 	    exit(killed);
-  {tcp_closed,_Port} -> exit(killed);
+  {tcp_closed,_Port} -> init:stop();
 	Any ->
 	    io:format("top_loop (driver) got:~p~n",[Any]),
 	    loop(Client, Fd, Bin, Max, OB, LO)
