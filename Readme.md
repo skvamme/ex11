@@ -9,10 +9,9 @@ With erlang you get:
 
 
 <h1>Portable</h1>
-Ubunty Touch with Mir
-BQ Aquaris E4.5 Ubuntu Phone
-Mac OSX
-Raspbian on Raspberry Pi
+* BQ Aquaris E4.5 with [Ubunty Touch with Mir](doc/Xmir.md)
+* [Mac OSX](doc/OSX.md)
+* Raspbian on [Raspberry Pi](doc/raspbian)
 
 <h1>Custom widgets</h1>
 Draw custom [widgets](doc/dxf2erl.md)
