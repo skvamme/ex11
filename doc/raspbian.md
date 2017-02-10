@@ -1,7 +1,7 @@
-Sometimes, when you don't need a full fledged window manager but just want to display a sensor value or a couple of push buttons and a slider on a 5" screen, then try this all erlang graphics X11 library for your raspberry pi erlang project. You get soft realtime animations. Concurrency between 2 or more widgets on screen. Hot code loading, you can update the GUI from your PC while your embedded raspi system is running. Custom widgets, show what you can draw. Lots of free DXF and Google Sketchup graphics and symbol libraries on the internet to download and convert from DXF to ex11 with the included dxf2erl utility.
+<h1>Raspberry Pi</h1>
 
+Install with a fresh Raspbian (even Light will do but remember to run raspi-config to expand your file system to fill your memory card).
 
-Install with a fresh Raspbian (even Light will do but remember to run raspi-config to expand your file system to fill your memory card). If you already have xserver and erlang installed, skip those steps:
 # Erlang
 sudo apt-get update
 sudo apt-get install wget
@@ -16,7 +16,7 @@ sudo make install
 cd ..
 rm otp_src_19.2.tar.gz
 
-# xserver
+# xserver (only on Raspbian Light)
 sudo apt-get install xserver-xorg
 
 
@@ -35,7 +35,7 @@ export XAUTHORITY="/home/pi/.Xauthority"
 cd ex11
 make
 
-# start Xorg
+# start Xorg (only on Raspbian Light)
 sudo Xorg -s 0 dpms &
 (Press enter and you will get the command prompt back. Xorg can be automatically started at boot, Google it up)
 

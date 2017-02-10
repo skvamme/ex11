@@ -1,5 +1,5 @@
 1) Add suport for the Render extension (alpha channel etc).
 
-2) Add a beter unixdom that can work with Ubuntu XMir (Xmir don't allow port 6000 comms).
+2) Done, thanks to erlin. #Add a beter unixdom that can work with Ubuntu XMir (Xmir don't allow port 6000 comms).
 
 3) Add smart widgets for embedded systems.

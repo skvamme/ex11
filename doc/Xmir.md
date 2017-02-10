@@ -1,3 +1,5 @@
+<h1>Ubuntu Touch/Phone with Mir Display Server</h1>
+
 Erlang ex11 is tested on BQ Aquaris E4.5 Ubuntu Phone
 
 #First you have to install an additional root FS on the phone
@@ -25,4 +27,5 @@ cd myRoot
 sudo chroot .
 cd
 cd ex11/util
+# Start the erlang app
 erl -noshell -pa '../lib' -s clock init
