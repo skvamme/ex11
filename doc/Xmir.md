@@ -13,21 +13,17 @@ sudo mount --bind /tmp myRoot/tmp
 cd myRoot
 sudo chroot .
 echo "nameserver 127.0.1.1" > /etc/resolv.conf
-apt-get install xauth
-xauth
-add :0 . ab12cd34ef56fe78dc90ba1a2b3c4d5e6f
-exit
 exit
 ```
 From now on, every time you want to start an erlang app, start an Xmir window session
 ```bash
 Xmir :0 --desktop_file_hint=/usr/share/applications/unity8.desktop &
-cd myRoot
-sudo chroot .
-cd
 ```
 ### Install Erlang
 ```bash
+cd myRoot
+sudo chroot .
+cd
 sudo apt-get update
 sudo apt-get install wget
 sudo apt-get install libssl-dev
@@ -46,6 +42,7 @@ rm otp_src_19.2.tar.gz
 sudo apt-get install git
 git clone https://github.com/skvamme/ex11.git
 sudo apt-get install libjpeg8-dev
+apt-get install xauth
 xauth
 add :0 . ab12cd34ef56fe78dc90ba1a2b3c4d5e6f
 #(If there is any chance your system could be hacked, replace at least one of the random characters above)
