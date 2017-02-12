@@ -83,9 +83,19 @@ sudo erl -pa '../lib'
 main:start().
 ```
 
-### Put these three lines in a script file to run the clock util from the phone menu
+### Put these three lines in a script file to autostart the clock util when the phone is booting
 ```bash
 Xmir :0 --desktop_file_hint=/usr/share/applications/unity8.desktop &
 sudo mount --bind /tmp myRoot/tmp
 sudo chroot myRoot/ /bin/bash -c "cd /home/phablet/ex11/util; erl -noshell -pa '../lib' -s clock init"
 ```
+
+### Create /usr/share/upstart/sessions/erlang.conf and call your new script file
+```bash
+description "my script"
+start on started unity8-dash 
+
+exec /home/phablet/my_new_script.sh
+```
+
+
