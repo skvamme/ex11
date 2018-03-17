@@ -18,7 +18,7 @@
 		  ePolyText8/5,
 		  mkRectangle/4,
 		  rpc/2,
-		  xClearArea/1,
+		  xClearArea/2,
 		  xColor/2,
 		  xCreateGC/2,
 		  xCreatePixmap/4,
@@ -123,7 +123,7 @@ fix_entry(Display, Entry, Data, Fun) ->
     B = [ePolyText8(Entry, xGC(Display, "text"), 4, 15, Str)|
 	 sw:sunken_frame(Display, Entry, Width, Ht)],
     Draw = fun() -> xDo(Display, B) end,
-    xDo(Display, xClearArea(Entry)),
+    xClearArea(Display, Entry),
     Draw(),
     XX = 9*N+5, YY = 4,
     swBlinker:blink(Display, Entry, XX, YY),

@@ -9,7 +9,7 @@
 
 -export([start/0, join/3]).
 
--import(sw, [xStart/1]).
+-import(sw, [xStart/0]).
 -import(ex11_lib, [rpc/2]).
 
 -include("sw.hrl").
@@ -20,7 +20,7 @@ start() ->
     spawn(fun win/0).
 
 win() ->
-    Display = xStart("3.1"),
+    Display = xStart(),
     Win  = swTopLevel:make(Display, 740, 460, ?bg),
     Win ! {onClick, fun({_,X,Y,_,_}) -> io:format("Click ~p,~p~n",[X,Y]) end},
     Text = swText:make(Win, 10, 10, 680, 400, ?AntiqueWhite, 

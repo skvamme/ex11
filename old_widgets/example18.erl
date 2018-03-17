@@ -16,7 +16,7 @@
 
 -import(ex11_lib,[colors/0]).
 -import(lists, [map/2,reverse/1,seq/2]).
--import(sw, [xStart/1]).
+-import(sw, [xStart/0]).
 -include("sw.hrl").
 
 -define(bg, 16#ffffcc).
@@ -29,7 +29,7 @@ win() ->
     Size=  18,
     Gap = 6, 
     Colors = colors(), 
-    Display = xStart("3.1"),
+    Display = xStart(),
     make_page(Display, Colors, Rows, Cols, Size, Gap),
     loop(Display).
 

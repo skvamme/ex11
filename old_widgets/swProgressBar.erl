@@ -15,7 +15,6 @@
 		   eMapWindow/1,
 		   ePolyText8/5, rpc/2, sleep/1, 
 		   xColor/2,
-		   xClearArea/1,
 		   xCreateCursor/2,
 		   xCreateWindow/10,
 		   xDo/2, xFlush/1,

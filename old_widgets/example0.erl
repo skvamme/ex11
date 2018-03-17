@@ -9,7 +9,7 @@
 
 -export([start/0]).
 
--import(sw, [mkTopLevel/4,xStart/1]).
+-import(sw, [mkTopLevel/4,xStart/0]).
 
 -include("sw.hrl").
 -define(bg, 16#ffffcc).
@@ -18,7 +18,7 @@ start() ->
     spawn(fun() -> win(examples1()) end).
 
 win(Examples) ->
-    Connection = xStart("3.1"),
+    Connection = xStart(),
     Ht = 35 * length(Examples) + 20,
     Win  = swTopLevel:make(Connection, 290, Ht, ?bg),
     add_examples(Win, 10, 10, 240, Examples),

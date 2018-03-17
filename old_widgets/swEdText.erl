@@ -14,7 +14,7 @@
 -include("sw.hrl").
 
 -import(ex11_lib, [ePolyText8/5, reply/2, rpc/2, sleep/1, 
-		   xClearArea/1,
+		   xClearArea/2,
 		   xDo/2, xFlush/1,
 		   xVar/2]).
 -import(lists, [mapfoldl/3]).
@@ -58,7 +58,7 @@ loop(Display, Wargs, GC, W, H, F1, F2, F3) ->
 	    loop(Display, Wargs, GC, W, H, F1, F2, F3);
 	{show, Strs} ->
 	    Win = Wargs#win.win, 
-	    xDo(Display, xClearArea(Win)),
+	    xClearArea(Display, Win),
 	    F = make_expose_fun(Strs, Win, GC, W, H, Display),
 	    F(),
 	    loop(Display, Wargs, GC, W, H, F, F2, F3);

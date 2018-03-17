@@ -12,7 +12,7 @@
 -include("sw.hrl").
 
 -import(swCanvas, [newPen/4, draw/3]).
--import(sw, [mkTopLevel/4,xStart/1,rpc/2]).
+-import(sw, [mkTopLevel/4,xStart/0,rpc/2]).
 -import(lists, [foldl/3,map/2,reverse/1,seq/2]).
 
 -define(bg, 16#ffffcc).
@@ -31,7 +31,7 @@ make() ->
     end.
 
 win(Parent) ->
-    Display = xStart("3.2"),
+    Display = xStart(),
     Win0    = swTopLevel:make(Display, 645, 710, ?bg),
     Canvas  = swCanvas:make(Win0, 10,10,625,690,1,?LightCyan),
     Canvas ! {onClick,fun({_,X,Y,_,_})->io:format("Click ~p,~p~n",[X,Y]) end},

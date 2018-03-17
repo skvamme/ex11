@@ -12,7 +12,7 @@
 
 -export([start/0]).
 
--import(sw, [xStart/1]).
+-import(sw, [xStart/0]).
 
 -include("sw.hrl").
 
@@ -22,7 +22,7 @@ start() ->
     spawn(fun win/0).
 
 win() ->
-    Display = xStart("3.1"),
+    Display = xStart(),
     Win  = swTopLevel:make(Display, 800, 600, ?bg),
     W1 = dragFrame(Win, 10, 30, 400, 200, ?blue),
     swButton:make(W1, 10, 14, 120, 30, ?green, "Erlang"),

@@ -15,7 +15,7 @@
 
 -export([start/0, start/1]).
 
--import(sw, [xStart/1]).
+-import(sw, [xStart/0]).
 -import(ex11_lib, [rpc/2]).
 -import(lists, [foldl/3,reverse/1, reverse/2]).
 
@@ -40,7 +40,7 @@ start(File) ->
     spawn(fun() -> win(File) end).
 		  
 win(File) ->
-    Display = xStart("3.2"),
+    Display = xStart(),
     Win     = swTopLevel:make(Display, 716, 390, ?bg),
     Text    = swEdText:make(Win, 10,10,696, 370,1,?white),
     Lines = read_file(File),

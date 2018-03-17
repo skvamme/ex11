@@ -15,7 +15,7 @@
 
 -export([start/0]).
 
--import(sw, [xStart/1]).
+-import(sw, [xStart/0]).
 -import(ex11_lib, [rpc/2]).
 
 -include("sw.hrl").
@@ -26,7 +26,7 @@ start() ->
     spawn(fun() -> win() end).
 		  
 win() ->
-    Display = xStart("3.2"), 
+    Display = xStart(),
     Win     = swTopLevel:make(Display, 490, 470, ?bg),
     Win ! {onClick, fun(X) -> io:format("~p~n",[X]) end},
     Emacs1   = swEmacs:make(Win, 10,10, 50, 20,1,?white),

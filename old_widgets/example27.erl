@@ -13,7 +13,7 @@
 
 -export([start/0]).
 
--import(sw, [xStart/1]).
+-import(sw, [xStart/0]).
 -import(swCanvas, [newPen/4, draw/3, delete/2]).
 -import(lists, [foreach/2, map/2]).
 
@@ -28,7 +28,7 @@ start() -> spawn(fun win/0).
 %% So make box that is 360 wide 180 high
 
 win() ->
-    Display = xStart("3.2"),
+    Display = xStart(),
     Width = 720,
     Ht = 360,
     Win     = swTopLevel:make(Display, Width+20,Ht+20, ?bg),

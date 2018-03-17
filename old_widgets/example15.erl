@@ -9,7 +9,7 @@
 
 -export([start/0]).
 
--import(sw, [xStart/1]).
+-import(sw, [xStart/0]).
 -import(ex11_lib, [xDo/2, eGetKeyboardMapping/2]).
 -import(lists, [foreach/2]).
 
@@ -21,7 +21,7 @@ start() ->
     spawn(fun win/0).
 
 win() ->
-    Display = xStart("3.2"),
+    Display = xStart(),
     {First,Last} = K = ex11_lib:get_display(Display, keycodes),
     io:format("K=~p~n",[K]),
     {ok, {keys, Val}} = xDo(Display, eGetKeyboardMapping(First,Last)),

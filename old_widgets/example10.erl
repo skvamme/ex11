@@ -11,7 +11,7 @@
 
 -export([start/0]).
 
--import(sw, [xStart/1, rpc/2]).
+-import(sw, [xStart/0, rpc/2]).
 
 -include("sw.hrl").
 
@@ -20,7 +20,7 @@
 start() -> spawn(fun shell/0).
 
 shell() ->
-    Display = xStart("3.1"),
+    Display = xStart(),
     Width = 650,
     Ht    = 350,
     Win   = swTopLevel:make(Display, Width, Ht, ?bg),

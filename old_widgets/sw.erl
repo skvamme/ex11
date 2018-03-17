@@ -11,7 +11,7 @@
 
 -export([sizeInCols2pixels/2, xyInCols2pixels/2,
 	 xyInPixels2cols/4, mkWindow/3, mkWindow/4, 
-	 xStart/1, generic/3,
+	 xStart/0, generic/3,
 	 rpc/2, raised_frame/4, reply/2, sunken_frame/4]).
 
 -import(ex11_lib, [eConfigureWindow/2,
@@ -53,8 +53,8 @@ xyInPixels2cols(X, Y, W, H) ->
 	  end,
     {XX1,YY1}.
 
-xStart(Vsn) ->
-    case ex11_lib:xStart(Vsn) of
+xStart() ->
+    case ex11_lib:xStart() of
 	{ok, Display} ->
 	    init(Display),
 	    Display;

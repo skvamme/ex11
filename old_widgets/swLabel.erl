@@ -12,7 +12,7 @@
 -include("sw.hrl").
 
 -import(ex11_lib, [ePolyText8/5, rpc/2, sleep/1, 
-		   xClearArea/1,
+		   xClearArea/2,
 		   xDo/2, xFlush/1,
 		   xVar/2]).
 
@@ -38,7 +38,7 @@ loop(B, Display, Wargs) ->
 	    loop(B, Display, Wargs);
 	{set, Str} ->
 	    Win = Wargs#win.win, 
-	    xDo(Display, xClearArea(Win)),
+	    xClearArea(Display, Win),
 	    Bin =  ePolyText8(Win, xVar(Display, sysFontId), 10, 18, Str),
 	    self() ! {event,void,expose,void},
 	    loop(Bin, Display, Wargs);

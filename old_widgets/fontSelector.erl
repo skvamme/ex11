@@ -14,7 +14,7 @@
 
 -export([start/0, start/1]).
 
--import(sw,       [xStart/1,rpc/2]).
+-import(sw,       [xStart/0,rpc/2]).
 -import(ex11_lib, [eListFonts/2, eSetInputFocus/3, xDo/2, xFlush/1,  
 		   xColor/2, xCreateGC/2, xEnsureFont/2]).
 
@@ -31,7 +31,7 @@ start(File) ->
     spawn(fun() -> win(File) end).
 		  
 win(File) ->
-    Display = xStart("3.2"), 
+    Display = xStart(),
     Width = 700, Ht = 600,
     Win       = swTopLevel:make(Display, Width, Ht, ?bg),  
     Win ! {onClick, fun(X) -> io:format("Pos=~p~n",[X]) end},

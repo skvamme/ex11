@@ -11,7 +11,7 @@
 
 -include("sw.hrl").
 
--import(sw, [mkTopLevel/4,xStart/1,rpc/2]).
+-import(sw, [mkTopLevel/4,xStart/0,rpc/2]).
 
 -define(bg, 16#ffffcc).
 
@@ -19,7 +19,7 @@ start() ->
     spawn_link(fun win/0).
 
 win() ->
-    Display = xStart("3.2"),
+    Display = xStart(),
     Win    = swTopLevel:make(Display, 235, 200, ?bg),
     Win ! {onClick, fun({_,X,Y,_,_}) -> io:format("Click ~p,~p~n",[X,Y]) end},
     S1  = swScrollbar:make(Win, 10, 10, 200, 30, 1, ?grey90, ?red),

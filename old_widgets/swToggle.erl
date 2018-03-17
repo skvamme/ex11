@@ -15,7 +15,7 @@
 		   eConfigureWindow/2,reply/2, ePolyFillRectangle/3,
 		   ePolyText8/5,eUnmapWindow/1,eMapWindow/1,
 		   mkRectangle/4,rpc/2,sleep/1,xCreateGC/2,
-		   xClearArea/1,xColor/2,
+		   xClearArea/2,xColor/2,
 		   xDo/2,xFlush/1,xVar/2]).
 
 -include("sw.hrl").
@@ -100,7 +100,7 @@ loop(Display, Fun, FunE, FunL, Enter,Leave,Wargs) ->
 
 flash(Display, Win, Draw) ->
     spawn(fun() ->
-		  xDo(Display, xClearArea(Win)),
+		  xClearArea(Display, Win),
 		  xFlush(Display),
 		  sleep(200),
 		  Draw(),

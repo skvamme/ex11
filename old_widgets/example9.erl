@@ -9,7 +9,7 @@
 
 -export([start/0]).
 
--import(sw, [xStart/1]).
+-import(sw, [xStart/0]).
 -import(example8, [join/3]).
 
 -include("sw.hrl").
@@ -23,7 +23,7 @@ win() ->
     show_file("intro.txt").
 
 show_file(File) ->
-    Display = xStart("3.1"),
+    Display = xStart(),
     Width = 850,
     Ht = 650,
     Win  = swTopLevel:make(Display, Width, Ht, ?bg),
