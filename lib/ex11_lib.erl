@@ -116,7 +116,7 @@
 colors() -> ex11_lib_rgb:colors().
 
 xStart() ->
-  xStart(":0.0").
+  xStart(os:getenv("DISPLAY", ":0.0")).
 xStart(Display) ->
   case ex11_lib_control:start(Display) of
     {ok, Pid, Screen} ->
