@@ -1,2 +1,3 @@
 *.beam
 *.o
+startup_error_report
