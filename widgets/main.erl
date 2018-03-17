@@ -10,7 +10,7 @@ start() -> spawn(?MODULE,init,[]).
 
 init() ->
 	Pid = self(),
-	{ok, Display} = ex11_lib:xStart(":0.0"),
+	{ok, Display} = ex11_lib:xStart(),
     xSetScreenSaver(Display,0),
 	Win = xCreateSimpleWindow(Display,0,0,?WT,?HT,?XC_arrow,xColor(Display,?black)),
 	xDo(Display, eMapWindow(Win)),

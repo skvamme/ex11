@@ -17,7 +17,7 @@
 
 -export([make/7]).
 
--import(sw, [xStart/1]).
+-import(sw, [xStart/0]).
 -import(ex11_lib, [rpc/2]).
 -import(lists, [duplicate/2,foldl/3,reverse/1, reverse/2]).
 

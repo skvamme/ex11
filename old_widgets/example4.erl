@@ -11,7 +11,7 @@
 
 -include("sw.hrl").
 
--import(sw, [mkTopLevel/4,xStart/1,rpc/2]).
+-import(sw, [mkTopLevel/4,xStart/0,rpc/2]).
 
 -define(bg, 16#ffffcc).
 
@@ -19,7 +19,7 @@ start() ->
     spawn_link(fun win/0).
 
 win() ->
-    Display = xStart("3.2"),
+    Display = xStart(),
     Win    = swTopLevel:make(Display, 265, 100, ?bg),
     Win ! {onClick, fun({_,X,Y,_,_}) -> io:format("Click ~p,~p~n",[X,Y]) end},
     Label  = swLabel:make(Win, 10, 50, 250, 30, 0, ?grey90, ""),

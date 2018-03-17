@@ -23,7 +23,6 @@
 
 -import(ex11_lib, [eImageText8/5,
 		   ePolyText8/5, rpc/2, sleep/1, 
-		   xClearArea/1,
 		   xCreateGC/2,
 		   xColor/2,
 		   xDo/2, 

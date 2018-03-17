@@ -11,7 +11,7 @@
 
 -include("sw.hrl").
 
--import(sw, [mkTopLevel/4,xStart/1]).
+-import(sw, [mkTopLevel/4,xStart/0]).
 
 -define(bg, 16#ffffcc).
 
@@ -19,7 +19,7 @@ start() ->
     spawn_link(fun win/0).
 
 win() ->
-    Display = xStart("3.2"),
+    Display = xStart(),
     Win     = swTopLevel:make(Display, 160, 50, ?bg),
     Button  = swButton:make(Win, 10, 10, 120, 30, ?grey88, "Hello"),
     Button  ! {onClick, fun(X) -> io:format("Click ~p~n",[X]) end},

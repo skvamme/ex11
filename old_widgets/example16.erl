@@ -20,13 +20,13 @@
 		   xSetVar/3]).
 
 -import(lists, [foldl/3, mapfoldl/3, max/1, map/2]).
--import(sw, [xStart/1]).
+-import(sw, [xStart/0]).
 
 start() ->
     spawn(fun() -> win() end).
 
 win() ->
-    Display = xStart("3.1"),
+    Display = xStart(),
     Win  =  swTopLevel:make(Display,400, 300, ?bg),
     Button = swButton:make(Win, 10, 10, 120, 30, ?yellow, "Hide Menu"),
     Pop = pop(Win, 10, 50, 120, ["one", "two", "three", "four","six",

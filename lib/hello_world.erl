@@ -27,7 +27,7 @@ start() ->
     spawn_link(fun() -> init() end).
 
 init() ->
-    {ok, Pid} = ex11_lib:xStart(":1.0"),
+    {ok, Pid} = ex11_lib:xStart(os:getenv("DISPLAY", ":1.0")),
     Win  = xCreateSimpleWindow(Pid, 10, 10, 300, 100, ?XC_arrow, 
 			       xColor(Pid, ?wheat2)),
     Font = xEnsureFont(Pid, "9x15"),  

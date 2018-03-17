@@ -12,7 +12,7 @@
 -include("sw.hrl").
 
 -import(swCanvas, [newPen/4, draw/3]).
--import(sw, [mkTopLevel/4,xStart/1,rpc/2]).
+-import(sw, [mkTopLevel/4,xStart/0,rpc/2]).
 -import(lists, [foldl/3,map/2,seq/2]).
 
 -define(bg, 16#ffffcc).
@@ -23,7 +23,7 @@ start() ->
     spawn_link(fun() -> win() end).
 
 win() ->
-    Display = xStart("3.2"),
+    Display = xStart(),
     P       = swLifts:make(),
     S = self(),
     P ! {onClick, fun(X) -> S ! X end},

@@ -25,7 +25,6 @@
 		   ePolyText8/5, 
 		   mkRectangle/4,
 		   rpc/2, sleep/1, 
-		   xClearArea/1,
 		   xCreateGC/2,
 		   xCreateGC/3,
 		   xColor/2,

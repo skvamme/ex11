@@ -17,7 +17,7 @@
 
 -export([start/0, start/1]).
 
--import(sw, [xStart/1]).
+-import(sw, [xStart/0]).
 -import(ex11_lib, [rpc/2]).
 -import(lists, [duplicate/2,foldl/3,reverse/1, reverse/2]).
 
@@ -31,7 +31,7 @@ start(File) ->
     spawn(fun() -> win(File) end).
 		  
 win(File) ->
-    Display = xStart("3.2"), 
+    Display = xStart(),
     WidthCols = 80, HtCols=10,
     {Width, Ht} = sw:sizeInCols2pixels(WidthCols, HtCols),
     Win     = swTopLevel:make(Display, Width+20, Ht+20, ?bg),

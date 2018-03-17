@@ -15,7 +15,7 @@
 
 -export([start/0]).
 
--import(sw, [xStart/1, rpc/2]).
+-import(sw, [xStart/0, rpc/2]).
 
 -include("sw.hrl").
 -import(lists, [last/1, map/2, reverse/1]).
@@ -25,7 +25,7 @@
 start() -> spawn(fun win/0).
 
 win() ->
-    Display = xStart("3.2"),
+    Display = xStart(),
     swBlinker:ensure_blinker(Display),
     edit(Display, 80, 24, 
 "This is a very simple editor.

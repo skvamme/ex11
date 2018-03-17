@@ -14,7 +14,7 @@
 		   rpc/2,
 		   xAddAction/2,
 		   xAddHandler/2,
-		   xClearArea/1,
+		   xClearArea/2,
 		   xColor/2,
 		   xDo/2,
 		   xFlush/1,
@@ -105,7 +105,7 @@ refresh(Display, Text, N,MaxHt, Ht, TextBuff, K0) ->
 	K == K0 ->
 	    noChange;
 	true ->
-	    xDo(Display, xClearArea(Text)),
+	    xClearArea(Display, Text),
 	    {Strs, TextBuff1} = get_screen(MaxHt, K, TextBuff),
 	    GC = xVar(Display, sysFontId),
 	    B = add_text(Text, GC, Strs),

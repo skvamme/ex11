@@ -29,7 +29,7 @@
 		   xFlush/1,
 		   xGC/2,
 		   xSpawn/1,
-		   xStart/1]).
+		   xStart/0]).
 
 -export([start/0]).
 
@@ -41,7 +41,7 @@ start() ->
     spawn_link(fun() -> init() end).
 
 init() ->
-    {ok,Pid}   = xStart("3.2"),
+    {ok,Pid}   = xStart(),
     spawn(fun()  -> win1(Pid) end),
     spawn(fun()  -> win2(Pid) end),
     spawn(fun()  -> win3(Pid) end),

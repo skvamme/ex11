@@ -9,7 +9,7 @@
 
 -export([start/0]).
 
--import(sw, [xStart/1]).
+-import(sw, [xStart/0]).
 
 -include("sw.hrl").
 
@@ -19,7 +19,7 @@ start() ->
     spawn(fun win/0).
 
 win() ->
-    Display = xStart("3.2"),
+    Display = xStart(),
     Win  = swTopLevel:make(Display,800, 70, ?bg),
     Rect = swRectangle:make(Win, 10, 10, 50, 50, 1, ?red),
     loop(370, Rect).

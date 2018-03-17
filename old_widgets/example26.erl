@@ -12,7 +12,7 @@
 
 -export([start/0]).
 
--import(sw, [xStart/1]).
+-import(sw, [xStart/0]).
 -import(swCanvas, [newPen/4, draw/3, delete/2]).
 
 -include("sw.hrl").
@@ -22,7 +22,7 @@
 start() -> spawn(fun win/0).
 
 win() ->
-    Display = xStart("3.2"),
+    Display = xStart(),
     XX = 40, YY=20,
     {Width, Ht} = sw:sizeInCols2pixels(XX, YY),
     Win     = swTopLevel:make(Display, Width+20, Ht+20, ?bg),

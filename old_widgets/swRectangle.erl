@@ -12,7 +12,6 @@
 -include("sw.hrl").
 
 -import(ex11_lib, [ePolyText8/5, rpc/2, sleep/1, 
-		   xClearArea/1,
 		   xDo/2, xFlush/1,
 		   xVar/2]).
 

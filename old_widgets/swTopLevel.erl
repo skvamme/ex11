@@ -16,7 +16,7 @@
 
 -import(ex11_lib,
 	[reply/2, reply/2, rpc/2, get_display/2, get_root_of_screen/2,
-	 xClearArea/1, xColor/2, xCreateGC/3, xDo/2, xFlush/1]).
+	 xClearArea/2, xColor/2, xCreateGC/3, xDo/2, xFlush/1]).
 
 -import(lists, [foreach/2]).
 
@@ -108,7 +108,7 @@ loop(Display, Wargs, Pens, L, Fun, CFun) ->
     end.
 
 refresh(Display, Win, {L,_}) ->
-    xDo(Display, xClearArea(Win)),
+    xClearArea(Display, Win),
     foreach(fun({_,Bin}) -> xDo(Display, Bin) end, L),
     xFlush(Display).
 

@@ -13,7 +13,7 @@
 -include("sw.hrl").
 
 -import(ex11_lib, [ePolyText8/5, rpc/2, sleep/1, 
-		   xClearArea/1,
+		   xClearArea/2,
 		   xDo/2, xFlush/1,
 		   xVar/2]).
 
@@ -49,7 +49,7 @@ loop(B, Display, Wargs, Fun) ->
 	    loop(B, Display, Wargs, Fun1);
 	{set, Str} ->
 	    Win = Wargs#win.win, 
-	    xDo(Display, xClearArea(Win)),
+	    xClearArea(Display, Win),
 	    Bin =  draw_cmd(Display, Wargs, Str),
 	    loop(Bin, Display, Wargs, Fun);
 	{'EXIT', Pid, Why} ->
@@ -72,7 +72,7 @@ flash(Display, Wargs) ->
     S = self(),
     Win=Wargs#win.win,
     spawn(fun() ->
-		  xDo(Display, xClearArea(Win)),
+		  xClearArea(Display, Win),
 		  xFlush(Display),
 		  sleep(200),
 		  S ! {event,Win, expose, void}

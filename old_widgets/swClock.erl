@@ -14,13 +14,11 @@
 -include("sw.hrl").
 
 -import(ex11_lib, [ePolyText8/5, rpc/2, sleep/1, 
-		   xClearArea/1,
 		   eCopyArea/9,
 		   ePolyFillRectangle/3,
 		   ePolyLine/4,
 		   mkPoint/2,
 		   mkRectangle/4,
-		   xClearArea/1,
 		   xColor/2,
 		   xCreateGC/2,
 		   xCreatePixmap/4,

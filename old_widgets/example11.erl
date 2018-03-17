@@ -9,7 +9,7 @@
 
 -export([start/0]).
 
--import(sw, [xStart/1]).
+-import(sw, [xStart/0]).
 -import(ex11_lib, [rpc/2]).
 
 -include("sw.hrl").
@@ -20,7 +20,7 @@ start() ->
     spawn_link(fun win/0).
 
 win() ->
-    Display = xStart("3.1"),
+    Display = xStart(),
     Width = 950,
     Ht = 350,
     Win  = swTopLevel:make(Display, Width, Ht, ?bg),

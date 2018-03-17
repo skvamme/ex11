@@ -15,7 +15,7 @@
 
 -export([start/0, start/1]).
 
--import(sw, [xStart/1]).
+-import(sw, [xStart/0]).
 -import(ex11_lib, [eListFonts/2,
 		   rpc/2, xDo/2
 		  ]).
@@ -42,7 +42,7 @@ start(File) ->
     spawn(fun() -> win(File) end).
 		  
 win(File) ->
-    Display = xStart("3.2"), 
+    Display = xStart(),
     Width   = 500, Ht = 400,
     Win     = swTopLevel:make(Display, Width, Ht, ?bg),
     Text    = swErlPoint:make(Win, 10,10, Width-20, Ht-20,1,?azure),

@@ -9,7 +9,7 @@
 
 -export([start/0]).
 
--import(sw, [xStart/1, rpc/2]).
+-import(sw, [xStart/0, rpc/2]).
 
 -import(lists, [map/2, mapfoldl/3, max/1]).
 
@@ -42,7 +42,7 @@ form_widget(S, Len, Labels) ->
     WidthEntry = 9*Len+20,
     Width = WidthEntry + WidthLabel+40,
     Ht = length(Labels)*30 + 65,
-    Display = xStart("3.1"),
+    Display = xStart(),
     Win  = swTopLevel:make(Display,Width, Ht, ?bg),
     {Pids,Y1} = mapfoldl(fun(Txt,Y) ->
 				 mkLabel1(Win, 10, Y, WidthLabel, Txt),

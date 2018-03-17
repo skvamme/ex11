@@ -15,7 +15,7 @@
 
 -export([make/7]).
 
--import(sw, [xStart/1]).
+-import(sw, [xStart/0]).
 -import(ex11_lib, [eListFonts/2, xDo/2, rpc/2]).
 -import(lists, [duplicate/2,foldl/3,map/2,member/2,reverse/1, 
 		reverse/2, sort/1]).
