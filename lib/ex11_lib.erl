@@ -95,7 +95,9 @@
          xSetVar/3,
          xMkTmpGC/2,
          xMkTmpPen/3,
-         xVar/2
+         xVar/2,
+         xSetWMName/3,
+         xSetNormalHints/3
         ]).
 
 
@@ -624,6 +626,14 @@ xGetAtomName(Display, N) ->
 eGetAtomName(N) ->
   call(17,<<N:32>>,eGetAtomName).
 
+% this could probably use a cache!
+xInternAtom(Display, N, OnlyIfExists) ->
+  xDo(Display, eInternAtom(N, OnlyIfExists)).
+
+eInternAtom(N, OnlyIfExists) ->
+  Len = size(N),
+  call(16, eBool(OnlyIfExists), <<Len:16, 0:16, N/binary>>, eInternAtom).
+
 eGetKeyboardMapping(First, Last) ->
   Count = Last - First + 1,
   call(101, <<First:8,Count:8,0:16>>, {eGetKeyboardMapping,First}).
@@ -1093,6 +1103,8 @@ pReply1(eGetAtomName, <<_:64,Need:16,_:22/binary,S1/binary>>) ->
     _ ->
       binary_to_list(S1)
   end;
+pReply1(eInternAtom, <<_:64,Atom:32,_/binary>>) ->
+  Atom;
 pReply1({eGetKeyboardMapping,First}, <<_:8,KeySymsPerKeycode:8,_:16,ReplyLen:32,_:192,
                                        Stuff/binary>>) ->
   Is = pKeySymbs(Stuff),
@@ -1278,3 +1290,37 @@ sleep(T) ->
   end.
 
 get_root_of_screen(Pid, Screen) -> rpc(Pid, {get_root_of_screen, Screen}).
+
+%%% Some ICCCM / Extended Window Manager Hints apis
+
+xSetNormalHints(Display, Window, Hints) ->
+  {ok, NormalHints} = xInternAtom(Display, <<"WM_NORMAL_HINTS">>, false),
+  {ok, SizeHints} = xInternAtom(Display, <<"WM_SIZE_HINTS">>, false),
+  Data = <<0:576>>,
+  Data1 = lists:foldl(fun eNormalHint/2, Data, Hints),
+  xDo(Display, eChangeProperty(Window, replace, NormalHints, SizeHints, 32, Data1)).
+
+% more things could be added from https://www.x.org/releases/X11R7.6/doc/xorg-docs/specs/ICCCM/icccm.html#wm_normal_hints_property
+eNormalHint({min_size, Width, Height}, <<Flags:32, Before:128, _:64, Rest/binary>>) ->
+    Flags1 = Flags bor 16,
+    <<Flags1:32, Before:128, Width:32, Height:32, Rest/binary>>;
+eNormalHint({max_size, Width, Height}, <<Flags:32, Before:192, _:64, Rest/binary>>) ->
+    Flags1 = Flags bor 32,
+    <<Flags1:32, Before:192, Width:32, Height:32, Rest/binary>>;
+eNormalHint(Other, Acc) ->
+    io:format("blah ~2000p", [{Other, Acc}]),
+    Acc.
+
+xSetWMName(Display, Window, Title) ->
+  {ok, Name} = xInternAtom(Display, <<"_NET_WM_NAME">>, false),
+  {ok, Utf8String} = xInternAtom(Display, <<"UTF8_STRING">>, false),
+  xDo(Display, eChangeProperty(Window, replace, Name, Utf8String, 8, Title)).
+
+eChangeProperty(Window, Mode, Property, Type, Format, Data) ->
+  ModeInt = property_mode(Mode),
+  DataLen = size(Data) * 8 div Format,
+  req(18, ModeInt, <<Window:32, Property:32, Type:32, Format:8, 0:24, DataLen:32, Data/binary>>).
+
+property_mode(replace) -> 0;
+property_mode(prepend) -> 1;
+property_mode(append) -> 2.
