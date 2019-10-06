@@ -4,18 +4,7 @@ Install with a fresh Raspbian (even Light will do but remember to run raspi-conf
 
 ## Erlang
 ```bash
-sudo apt-get update
-sudo apt-get install wget
-sudo apt-get install libssl-dev
-sudo apt-get install ncurses-dev
-wget http://www.erlang.org/download/otp_src_19.2.tar.gz
-tar -xzvf otp_src_19.2.tar.gz
-cd otp_src_19.2/
-./configure
-make
-sudo make install
-cd ..
-rm otp_src_19.2.tar.gz
+https://elinux.org/Erlang
 ```
 ## xserver (only on Raspbian Light)
 ```bash
