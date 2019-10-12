@@ -1,6 +1,6 @@
 <h1>Ubuntu Touch/Phone with Mir Display Server</h1>
 
-Erlang ex11 is tested on BQ Aquaris E4.5 Ubuntu Phone
+Erlang ex11 is tested on BQ Aquaris E4.5 Ubuntu Touch Phone @UBports
 
 First you have to create an additional root FS on the phone
 ```bash
