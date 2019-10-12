@@ -10,7 +10,7 @@ With erlang you get:
 * Hot code loading.
 
 ## Portable
-* BQ Aquaris E4.5 with [Ubunty Touch with Mir](doc/Xmir.md)
+* BQ Aquaris E4.5 with [Ubunty Touch with Mir](doc/Xmir.md) @UBports
 * [Mac OSX](doc/OSX.md)
 * Raspbian on [Raspberry Pi](doc/raspbian.md)
 
