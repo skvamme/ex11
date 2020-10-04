@@ -7,7 +7,7 @@ When you don't need a full fledged window manager but just want to display a sen
 With erlang you get: 
 * Soft realtime. 
 * Concurrency. 
-* Hot code loading.
+* Hot code loading. http://wiki.openmoko.org/wiki/Hot_code_loading
 
 ## Portable
 * BQ Aquaris E4.5 with [Ubunty Touch with Mir](doc/Xmir.md) @UBports
